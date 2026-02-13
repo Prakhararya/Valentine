@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be Mine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe4e1; /* Soft Rose */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #d02e5e;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #fff;
+        }
+
+        .gif-container img {
+            width: 250px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #ff758f;
+        }
+
+        #noBtn {
+            background-color: #fff;
+            color: #ff4d6d;
+            position: absolute;
+            left: 130px; /* Starting position */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="gif-container">
+            <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.webp" alt="Cute bear">
+        </div>
+        <h1>Will you be my Valentine? ❤️</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">YES</button>
+            <button id="noBtn" onmouseover="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+		function moveButton() {
+			const noBtn = document.getElementById('noBtn');
+			
+			// The "distance" we want it to jump each time
+			const padding = 20; 
+			const moveRange = 150; 
+
+			// Get current position
+			let rect = noBtn.getBoundingClientRect();
+			
+			// Calculate a random new position nearby
+			let newX = rect.left + (Math.random() - 0.5) * moveRange * 2;
+			let newY = rect.top + (Math.random() - 0.5) * moveRange * 2;
+
+			// Boundary Check: Ensure it doesn't go off the screen edges
+			const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+			const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+			// If it hits a wall, bounce it back toward the center
+			if (newX < padding) newX = padding + 50;
+			if (newX > maxX) newX = maxX - 50;
+			if (newY < padding) newY = padding + 50;
+			if (newY > maxY) newY = maxY - 50;
+
+			noBtn.style.position = 'fixed'; // Fixed keeps it relative to the window
+			noBtn.style.left = newX + 'px';
+			noBtn.style.top = newY + 'px';
+		}
+
+		function celebrate() {
+			document.body.innerHTML = `
+				<div class="container">
+					<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDdqZ3B0NXI4ZGtuNWI3M3Vjam41Z2Rha2c5bnBoNjExbHNscjk1diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/zFHu7yuSHm4H5gNZVx/giphy.gif" style="width:300px;">
+					<h1 style="color: #d02e5e;">Yay! Best decision ever! ❤️🌹</h1>
+				</div>
+			`;
+		}
+    </script>
+</body>
+</html>
